@@ -1,0 +1,249 @@
+<html>
+    <head>
+        <title>Common Command Line Interface Tool
+Specification - 0.1.0</title>
+<style>
+body {
+    background-color: #242322;
+    color: #FFEEDD;
+    font-family: arial;
+}
+a {
+    color: #FF9922; 
+}
+#content {
+    margin-left: auto;
+    margin-right: auto;
+    display: block;
+    max-width: 800px;
+}
+</style>
+    </head>
+    <body>
+        <div id='content'>
+<h1>Common Command Line Interface Tool Specification - 0.1.0</h1>
+<hr />
+<ul class="incremental">
+<li><a href="#introduction" id="toc-introduction"><span
+class="toc-section-number">1</span> Introduction</a></li>
+<li><a href="#ideals" id="toc-ideals"><span
+class="toc-section-number">2</span> Ideals</a></li>
+<li><a href="#conventions" id="toc-conventions"><span
+class="toc-section-number">3</span> Conventions</a>
+<ul class="incremental">
+<li><a href="#note-taking" id="toc-note-taking"><span
+class="toc-section-number">3.1</span> Note-Taking</a>
+<ul class="incremental">
+<li><a href="#engineering-notes" id="toc-engineering-notes"><span
+class="toc-section-number">3.1.1</span> Engineering Notes</a></li>
+<li><a href="#decision-logarchitecture-decision-records"
+id="toc-decision-logarchitecture-decision-records"><span
+class="toc-section-number">3.1.2</span> Decision Log/Architecture
+Decision Records</a></li>
+</ul></li>
+<li><a href="#cli-flags" id="toc-cli-flags"><span
+class="toc-section-number">3.2</span> CLI Flags</a></li>
+<li><a href="#language-specific" id="toc-language-specific"><span
+class="toc-section-number">3.3</span> Language Specific</a>
+<ul class="incremental">
+<li><a href="#bash" id="toc-bash"><span
+class="toc-section-number">3.3.1</span> Bash</a></li>
+</ul></li>
+<li><a href="#conventional-output-directories"
+id="toc-conventional-output-directories"><span
+class="toc-section-number">3.4</span> Conventional Output
+Directories</a></li>
+<li><a href="#misc" id="toc-misc"><span
+class="toc-section-number">3.5</span> Misc</a>
+<ul class="incremental">
+<li><a href="#status-indicators" id="toc-status-indicators"><span
+class="toc-section-number">3.5.1</span> Status indicators</a></li>
+</ul></li>
+<li><a href="#tool-project" id="toc-tool-project"><span
+class="toc-section-number">3.6</span> Tool Project</a>
+<ul class="incremental">
+<li><a href="#changelog.md" id="toc-changelog.md"><span
+class="toc-section-number">3.6.1</span> CHANGELOG.md</a></li>
+<li><a href="#flake.nix" id="toc-flake.nix"><span
+class="toc-section-number">3.6.2</span> flake.nix</a></li>
+<li><a href="#readme.md" id="toc-readme.md"><span
+class="toc-section-number">3.6.3</span> README.md</a></li>
+<li><a href="#setup.sh" id="toc-setup.sh"><span
+class="toc-section-number">3.6.4</span> setup.sh</a></li>
+<li><a href="#todo.txt" id="toc-todo.txt"><span
+class="toc-section-number">3.6.5</span> todo.txt</a></li>
+</ul></li>
+</ul></li>
+</ul>
+<hr />
+<h1 data-number="1" id="introduction"><span
+class="header-section-number">1</span> Introduction</h1>
+<p>The goal of this project is to aid in building robust,
+comprehensible, and flexible tools that both I and others can use. This
+entails rigor and adherence to effective standards and best practices
+for tooling, which will be formalized for my use in this
+specification.</p>
+<p>Adhering to principles by sheer will power is subject to laziness and
+forgetfullness, and so this specification is intended to inform this
+repository’s tools to help build tools, because additional meta levels
+of abstraction always lead to good things. ()</p>
+<h1 data-number="2" id="ideals"><span
+class="header-section-number">2</span> Ideals</h1>
+<ul class="incremental">
+<li>Clean, consistent formatting and documentation.</li>
+<li>As small and minimal as possible while remaining effective and
+robust.</li>
+<li>Use common or well defined standards where available.</li>
+<li>Subtractive-based or snippet-based programming where possible.</li>
+</ul>
+<h1 data-number="3" id="conventions"><span
+class="header-section-number">3</span> Conventions</h1>
+<h2 data-number="3.1" id="note-taking"><span
+class="header-section-number">3.1</span> Note-Taking</h2>
+<p>Taking notes is critical to help understand previous work, decisions,
+and for getting back into the right mindset for working on a problem.
+Notes can be written at different levels for different levels of
+“consumer”.</p>
+<p>TODO: spec docs?</p>
+<h3 data-number="3.1.1" id="engineering-notes"><span
+class="header-section-number">3.1.1</span> Engineering Notes</h3>
+<p>A research or engineering log is really useful for
+stream-of-consciousness thoughts while working. This is useful to keep
+track of trivial TODOs that you’re working on as well as immediate notes
+for what you think the problem is when you’re debugging/things you’re
+trying to investigate - it makes it easier to get back into the flow of
+what you were doing if you get interrupted and provides a traceable log
+of what you’ve done/if you’ve encountered an issue before.</p>
+<h3 data-number="3.1.2"
+id="decision-logarchitecture-decision-records"><span
+class="header-section-number">3.1.2</span> Decision Log/Architecture
+Decision Records</h3>
+<p>Significant architecture decisions should be documented using a ADR
+format, detailing the context/problem, the proposed decision and why,
+the alternatives considered and why they weren’t chosen, and
+consequences.</p>
+<p>Each decision should go in its own file, probably under a
+<code>/docs/adr</code> directory.</p>
+<h2 data-number="3.2" id="cli-flags"><span
+class="header-section-number">3.2</span> CLI Flags</h2>
+<p>These are flags that should be available to most (if not all)
+tools:</p>
+<ul class="incremental">
+<li><code>-h, --help</code> (prints usage text)</li>
+<li><code>-V, --version</code> (prints current version number of
+tool)</li>
+<li><code>-v, --verbose</code> (print more stuff, may not always be
+applicable)</li>
+<li><code>--no-color</code> (print without rendering ansi color
+sequences)</li>
+</ul>
+<h2 data-number="3.3" id="language-specific"><span
+class="header-section-number">3.3</span> Language Specific</h2>
+<h3 data-number="3.3.1" id="bash"><span
+class="header-section-number">3.3.1</span> Bash</h3>
+<p>NOTE: subtractive but also put each part in a snippet and throw into
+nix-config</p>
+<h2 data-number="3.4" id="conventional-output-directories"><span
+class="header-section-number">3.4</span> Conventional Output
+Directories</h2>
+<p>There are commonly observed standards for where stuff goes. XDG
+specification should be adhered to:</p>
+<p><a
+href="https://wiki.archlinux.org/title/XDG_Base_Directory">https://wiki.archlinux.org/title/XDG_Base_Directory</a></p>
+<p><a
+href="https://specifications.freedesktop.org/basedir-spec/basedir-spec-latest.html">https://specifications.freedesktop.org/basedir-spec/basedir-spec-latest.html</a></p>
+<p>If these variables are set in env, use them, otherwise default to
+provided:</p>
+<ul class="incremental">
+<li><code>XDG_CONFIG_HOME</code> (<code>$HOME/.config</code>) -
+configuration files.</li>
+<li><code>XDG_CACHE_HOME</code> (<code>$HOME/.cache</code>) -
+non-essential cached data.</li>
+<li><code>XDG_DATA_HOME</code> (<code>$HOME/.local/share</code>) - data
+files.</li>
+<li><code>XDG_STATE_HOME</code> (<code>$HOME/.local/state</code>) -
+state files. (unsure if this is really used much)</li>
+<li><code>XDG_RUNTIME_DIR</code> - used for ephemeral stuff like sockets
+and pipes, see arch wiki above for more details</li>
+</ul>
+<p>There are also system directories <code>XDG_DATA_DIRS</code>
+(<code>/usr/local/share:/usr/share</code>) and
+<code>XDG_CONFIG_DIRS</code> (<code>/etc/xdg</code>), which are lists of
+other locations to look for configs/data files etc.</p>
+<p>Note that for all of these, it’s assumed your application makes its
+own directory within them.</p>
+<p>There are additinoal rules for how you combine looking at the system
+directories and the user ones, but I’m not sure if I’m going to be using
+those for now.</p>
+<h2 data-number="3.5" id="misc"><span
+class="header-section-number">3.5</span> Misc</h2>
+<h3 data-number="3.5.1" id="status-indicators"><span
+class="header-section-number">3.5.1</span> Status indicators</h3>
+<p>TODO: not sure if I agree this is really necessary.</p>
+<p>When a script involves status checks, and potentially a significant
+amount of log lines are output between the check and the end of the
+script, these should be recorded into a single status indicators string
+to be printed at the end of the process in a summary view.</p>
+<p>ex:</p>
+<pre><code>$ some_process
+[PASS] dependency 1 exists
+various log messages
+[PASS] dependency 2 exists
+other long running process messages...
+things
+more things
+so many things
+&gt; setup complete!
+
+Summary:
+[PASS] dependency 1 exists
+[PASS] dependency 2 exists</code></pre>
+<p>This of course is unnecessary for low output or small scripts. Note
+that diagnostic messages like this should be output over stderr, if
+actual output is ever expected from the script.</p>
+<h2 data-number="3.6" id="tool-project"><span
+class="header-section-number">3.6</span> Tool Project</h2>
+<p>TODO: tests</p>
+<h3 data-number="3.6.1" id="changelog.md"><span
+class="header-section-number">3.6.1</span> CHANGELOG.md</h3>
+<p>A record of changes following <a
+href="https://keepachangelog.com/en/1.0.0/">https://keepachangelog.com/en/1.0.0/</a>.
+Note that we do not need to use the tag differences at the bottom.</p>
+<h3 data-number="3.6.2" id="flake.nix"><span
+class="header-section-number">3.6.2</span> flake.nix</h3>
+<p>A flake to install the tool.</p>
+<h3 data-number="3.6.3" id="readme.md"><span
+class="header-section-number">3.6.3</span> README.md</h3>
+<p>A basic structured description of the tool, setup
+process/instructions, and so on.</p>
+<h3 data-number="3.6.4" id="setup.sh"><span
+class="header-section-number">3.6.4</span> setup.sh</h3>
+<p>A “manual” setup file, assuming no package management is used. This
+setup file should run any dependency checks, attempt to install
+dependencies if possible, or allow user override, or fail with a
+suggested fix. It should allow for a number of arguments like overriding
+where it’s installed, whether the install is interactive or not, and so
+on.</p>
+<p>TODO: what flags should setup standardly have?</p>
+<h3 data-number="3.6.5" id="todo.txt"><span
+class="header-section-number">3.6.5</span> todo.txt</h3>
+<p>The tool’s project todo-list should be managed through a
+<code>todo.txt</code> file. The formatting for this file should use a
+combination of standards from todo.txt <a
+href="https://github.com/todotxt/todo.txt">https://github.com/todotxt/todo.txt</a>
+and org mode TODO items <a
+href="https://github.com/todotxt/todo.txt">https://orgmode.org/manual/TODO-Items.html</a></p>
+<h4 data-number="3.6.5.1" id="format"><span
+class="header-section-number">3.6.5.1</span> Format</h4>
+<p>TODO: describe format</p>
+<pre><code>keyword: (optional-priority-letter) (optional-due-date) text [+tag] ...</code></pre>
+<h4 data-number="3.6.5.2" id="todo-keywords"><span
+class="header-section-number">3.6.5.2</span> TODO Keywords</h4>
+<p>TODO: look up common patterns. (I personally normally use TODO, STRT,
+WAIT, DONE, CANC, BUG, FIXD, IDEA</p>
+<p>The advantage in using common keywords both among source code as well
+as in a top level todo.txt is the ability to grep for all todos in a
+project.</p>
+        </div>
+    </body>
+</html>

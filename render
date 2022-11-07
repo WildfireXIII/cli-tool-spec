@@ -1,0 +1,3 @@
+#!/usr/bin/env bash
+
+pandoc -i spec.md -o spec.html --template template.html --standalone --toc --number-sections
